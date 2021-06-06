@@ -1,0 +1,30 @@
+header {
+    background-color:brown;
+}
+
+h1 {
+    color: black;
+    font-size: large;
+    font-weight: bold;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    text-align: center;
+}
+
+nav ul li {
+    display: inline-block;
+    padding-left: 300px;
+}
+
+h2 {
+    text-align: center;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+main {
+    background-color: burlywood;
+}
+
+footer {
+    background-color: brown;
+    text-align: end;
+}
