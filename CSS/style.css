@@ -1,0 +1,58 @@
+*{
+    box-sizing: border-box;
+}
+
+body {
+    background-color: burlywood ;
+}
+header {
+    background-color:brown;
+}
+
+#lists {
+    float: right;
+    
+}
+
+#imgs {
+    float: left;
+    width: 50%;
+}
+
+/* #btn {
+    float: right;
+} */
+
+img {
+display: inline-block;
+width: 32%;
+height: 200px;
+}
+
+ul {
+    background-color: chocolate;
+}
+h1 {
+    color: black;
+    font-size: large;
+    font-weight: bold;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    text-align: center;
+}
+
+nav ul li {
+    display: inline-block;
+    padding-left: 300px;
+}
+
+h2 {
+    text-align: center;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+
+
+footer {
+    background-color: brown;
+    text-align: end;
+}
