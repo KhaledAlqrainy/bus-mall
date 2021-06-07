@@ -1,7 +1,37 @@
+*{
+    box-sizing: border-box;
+}
+
+body {
+    background-color: burlywood ;
+}
 header {
     background-color:brown;
 }
 
+#lists {
+    float: right;
+    
+}
+
+#imgs {
+    float: left;
+    width: 50%;
+}
+
+/* #btn {
+    float: right;
+} */
+
+img {
+display: inline-block;
+width: 32%;
+height: 200px;
+}
+
+ul {
+    background-color: chocolate;
+}
 h1 {
     color: black;
     font-size: large;
@@ -20,9 +50,7 @@ h2 {
     font-family: 'Courier New', Courier, monospace;
 }
 
-main {
-    background-color: burlywood;
-}
+
 
 footer {
     background-color: brown;
