@@ -9,12 +9,13 @@ let button;
 let rightpic;
 let midpic;
 let leftpic;
-let rounds = 5;
+let rounds = 25;
 let counts = 0;
 let arrOfNames = [];
 let arrOfpicks = [];
 let arrOfshown = [];
 let previous = [];
+// let arrofall = [];
 
 //const. func.
 
@@ -28,9 +29,9 @@ function Products (name, source){
     arrOfNames.push(this.name);
 
     Products.all.push(this);
+
 }
 Products.all = [];
-
 
 
 //instance
@@ -55,12 +56,10 @@ new Products('unicorn' , './Images/unicorn.jpg' )
 new Products('usb' , './Images/usb.gif' )
 new Products('water-can' , './Images/water-can.jpg' )
 new Products('wine-glass' , './Images/wine-glass.jpg' )
-new Products('pet-sweep' , './Images/pet-sweep.jpg' )
-new Products('scissors' , './Images/scissors.jpg' )
-new Products('shark' , './Images/shark.jpg' )
-new Products('sweep' , './Images/sweep.png' )
-
-
+// new Products('pet-sweep' , './Images/pet-sweep.jpg' )
+// new Products('scissors' , './Images/scissors.jpg' )
+// new Products('shark' , './Images/shark.jpg' )
+// new Products('sweep' , './Images/sweep.png' )
 
 function getrandom(){
     let random = Math.floor(Math.random() * Products.all.length);
@@ -97,7 +96,6 @@ console.log(Products.all);
 // firstimage.addEventListener('click', handler);
 // secondimage.addEventListener('click', handler);
 cont.addEventListener('click', handler);
-
 function handler(event){
     counts++;
 
@@ -110,22 +108,24 @@ function handler(event){
         }else if(event.target.id ==='secimg'){
             Products.all[midpic].picks++;
         }else if (event.target.id === 'thirdimg'){
-            Products.all[rightpic].picks++
+            Products.all[rightpic].picks++;
+    
         }
         else{
             counts--;
             return;
         }
-
+        set ();
         showthreeimages();
+
     }else{
         
         button = document.getElementById('btn');
         button.addEventListener('click',showing);
         cont.removeEventListener('click', handler);
+    
        
     }
-    
 
 
         function showing(){
@@ -161,7 +161,7 @@ function getchart(){
             labels: arrOfNames,
             datasets: [
                 {
-                label: 'numbers of Votes',
+                label: 'numbers of Picks',
                 data: arrOfpicks,
                 backgroundColor: [
                     'rgba(255, 89, 122, 0.35)',
@@ -169,7 +169,7 @@ function getchart(){
                 borderWidth: 1
             },
             {
-              label: 'numbers of Seen',
+              label: 'numbers of Shown',
               data: arrOfshown,
               backgroundColor: [
                   'rgba(150, 180, 122, 0.65)',
@@ -180,3 +180,26 @@ function getchart(){
         },
     });
     }  
+
+    // arrofall.push(Products.all);
+    function set(){
+        let setjson = JSON.stringify(Products.all);
+        localStorage.setItem('Products',setjson)
+    }
+    
+    function get(){
+        let getjson = localStorage.getItem('Products');
+        let parseprod = JSON.parse(getjson)
+        if (parseprod){
+            Products.all = parseprod;
+            console.log(parseprod);
+            // for ( let i =0; i <Products.length; i++){
+
+            //     new Products ()
+            // }
+        }
+    
+    }
+
+    get();
+
