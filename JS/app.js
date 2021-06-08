@@ -14,6 +14,7 @@ let counts = 0;
 let arrOfNames = [];
 let arrOfpicks = [];
 let arrOfshown = [];
+let previous = [];
 
 //const. func.
 
@@ -71,12 +72,16 @@ function showthreeimages (){
     midpic = getrandom();
     leftpic = getrandom();
 
-    while (rightpic === midpic || rightpic === leftpic || leftpic === midpic){
+    while (rightpic === midpic || rightpic === leftpic || leftpic === midpic || previous.includes(leftpic) || previous.includes(midpic) || previous.includes(rightpic,previous)){
 
         leftpic = getrandom();
         midpic = getrandom();
         rightpic = getrandom();
     }
+
+    previous.push(leftpic);
+    previous.push(midpic);
+    previous.push(rightpic);
 
     firstimage.setAttribute('src', Products.all[leftpic].source);
     Products.all[leftpic].shown++;
