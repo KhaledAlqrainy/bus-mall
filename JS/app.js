@@ -9,11 +9,15 @@ let button;
 let rightpic;
 let midpic;
 let leftpic;
-let rounds = 25;
+let rounds = 5;
 let counts = 0;
+let arrOfNames = [];
+let arrOfpicks = [];
+let arrOfshown = [];
+let previous = [];
 
 //const. func.
-Products.all = [];
+
 
 function Products (name, source){
 
@@ -21,8 +25,11 @@ function Products (name, source){
     this.source = source;
     this.picks = 0;
     this.shown = 0;
+    arrOfNames.push(this.name);
+
     Products.all.push(this);
 }
+Products.all = [];
 
 
 
@@ -65,12 +72,16 @@ function showthreeimages (){
     midpic = getrandom();
     leftpic = getrandom();
 
-    while (rightpic === midpic || rightpic === leftpic || leftpic === midpic){
+    while (rightpic === midpic || rightpic === leftpic || leftpic === midpic || previous.includes(leftpic) || previous.includes(midpic) || previous.includes(rightpic,previous)){
 
         leftpic = getrandom();
         midpic = getrandom();
         rightpic = getrandom();
     }
+
+    previous.push(leftpic);
+    previous.push(midpic);
+    previous.push(rightpic);
 
     firstimage.setAttribute('src', Products.all[leftpic].source);
     Products.all[leftpic].shown++;
@@ -83,9 +94,9 @@ function showthreeimages (){
 showthreeimages();
 console.log(Products.all);
 
-firstimage.addEventListener('click', handler);
-secondimage.addEventListener('click', handler);
-thirdimage .addEventListener('click', handler);
+// firstimage.addEventListener('click', handler);
+// secondimage.addEventListener('click', handler);
+cont.addEventListener('click', handler);
 
 function handler(event){
     counts++;
@@ -101,18 +112,25 @@ function handler(event){
         }else if (event.target.id === 'thirdimg'){
             Products.all[rightpic].picks++
         }
+        else{
+            counts--;
+            return;
+        }
 
         showthreeimages();
     }else{
+        
         button = document.getElementById('btn');
         button.addEventListener('click',showing);
         cont.removeEventListener('click', handler);
+       
     }
     
 
 
         function showing(){
             getList();
+            getchart();
             button.removeEventListener('click', showing);
         }
 
@@ -123,6 +141,8 @@ function handler(event){
   function getList(){
     let ul = document.getElementById('list');
     for(let i = 0 ; i <Products.all.length; i++ ){
+        arrOfpicks.push(Products.all[i].picks);
+        arrOfshown.push(Products.all[i].shown);
       let li = document.createElement('li');
       ul.appendChild(li);
       li.textContent = `${Products.all[i].name} has ${Products.all[i].picks} Picks, and has been showen ${Products.all[i].shown} times`;
@@ -131,3 +151,32 @@ function handler(event){
   }
 }
 
+function getchart(){
+
+
+    let ctx = document.getElementById('charts')
+    let charts = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: arrOfNames,
+            datasets: [
+                {
+                label: 'numbers of Votes',
+                data: arrOfpicks,
+                backgroundColor: [
+                    'rgba(255, 89, 122, 0.35)',
+                ],
+                borderWidth: 1
+            },
+            {
+              label: 'numbers of Seen',
+              data: arrOfshown,
+              backgroundColor: [
+                  'rgba(150, 180, 122, 0.65)',
+              ],
+              borderWidth: 1
+          }
+          ]
+        },
+    });
+    }  
